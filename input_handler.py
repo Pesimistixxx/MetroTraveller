@@ -25,8 +25,9 @@ def find_closest_matches(data, query, threshold=10, max_results=6):
 
         number, name = parts
         name_lower = name.lower()
+        name_without_line = '_'.join(name_lower.split('_')[:-1])
 
-        distance = levenshtein_distance(query_lower, name_lower)
+        distance = levenshtein_distance(query_lower, name_without_line)
         is_substring = query_lower in name_lower
 
         if distance <= threshold or is_substring:
@@ -37,9 +38,11 @@ def find_closest_matches(data, query, threshold=10, max_results=6):
 
             adjusted_distance = distance - position_bonus
             results.append((adjusted_distance, int(number), name))
-    results.sort(key=lambda x: (x[0], x[1]))
-
-    return [name for _, _, name in results[:max_results]]
+    if not results:
+        return []
+    min_distance = min(result[0] for result in results)
+    best_results = [result for result in results if result[0] == min_distance]
+    return [name for _, _, name in best_results]
 
 
 data = []

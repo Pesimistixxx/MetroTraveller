@@ -40,16 +40,20 @@ connections_data = response_json['data']['connections']
 transitions_data = response_json['data']['transitions']
 stations_data = response_json['data']['stations']
 
+
 with open('transitions_data.txt', 'w') as file:
     for transition in transitions_data:
-        file.write(f"{transition['stationFromId']}, {transition['stationToId']}, {transition['pathLength']}\n")
+        file.write(f"{transition['stationFromId']} {transition['stationToId']} {transition['pathLength']}\n")
 
     for connection in connections_data:
-        file.write(f"{connection['stationFromId']}, {connection['stationToId']}, {connection['pathLength']}\n")
+        file.write(f"{connection['stationFromId']} {connection['stationToId']} {connection['pathLength']}\n")
 
 
 with open('stations_data.txt', 'w') as file:
     for station in stations_data:
         station_str = f'{station['id']} {station['name']['ru'].replace(' ', '_')}_{line_translator[station['lineId']]}\n'
-        print(f'{station['id']}: \"{station['name']['ru'].replace(' ', '_')}_{line_translator[station['lineId']]}\",', end=' ')
         file.write(station_str)
+    with open('stations_d5.txt') as f:
+        for line in f.readlines():
+            print(f'"{line.split()[1]}": {line.split()[0]},', end=' ')
+            file.write(line)
