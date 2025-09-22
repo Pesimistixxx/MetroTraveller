@@ -17,8 +17,11 @@ def levenshtein_distance(s1, s2):
 def find_closest_matches(data, query, threshold=10, max_results=6):
     query_lower = query.lower()
     results = []
-    if query in data:
-        return query
+
+    for station in data:
+        if station.split()[-1] == query:
+            return [query]
+
     for item in data:
         parts = item.split(' ', 1)
         if len(parts) < 2:

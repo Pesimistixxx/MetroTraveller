@@ -420,7 +420,7 @@ def calculate_root(message):
         route_sequences.append([stations_to_id_dict[prev_station], stations_to_id_dict[station], 1])
     else:
         if first_line_station != prev_station:
-            route_sequences.append([stations_to_id_dict[first_line_station], stations_to_id_dict[station], 1])
+            route_sequences.append([stations_to_id_dict[first_line_station], stations_to_id_dict[station], 0])
     for i in range(len(route_sequences)):
         if len(route_sequences[i]) == 3:
             start, end, route_type = route_sequences[i]
