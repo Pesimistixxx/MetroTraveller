@@ -338,7 +338,7 @@ def create_station_keyboard(stations):
 def info(message):
     bot.send_message(message.from_user.id,
                      text="Бот, строящий оптимальный маршрут в Московском Метро с возможность прокладывать маршрут до 10 точек одновременно пиши /start и попробуй сам",
-                     reply_markup=types.ReplyKeyboardRemove)
+                     reply_markup=types.ReplyKeyboardRemove())
 
 
 @bot.message_handler(commands=['start'])
