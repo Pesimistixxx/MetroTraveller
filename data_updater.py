@@ -48,6 +48,10 @@ with open('transitions_data.txt', 'w') as file:
     for connection in connections_data:
         file.write(f"{connection['stationFromId']} {connection['stationToId']} {connection['pathLength']}\n")
 
+    with open('transitions_d5.txt', 'r') as f:
+        for line in f:
+            file.write(line)
+
 
 with open('stations_data.txt', 'w') as file:
     for station in stations_data:
@@ -55,5 +59,4 @@ with open('stations_data.txt', 'w') as file:
         file.write(station_str)
     with open('stations_d5.txt') as f:
         for line in f.readlines():
-            print(f'"{line.split()[1]}": {line.split()[0]},', end=' ')
             file.write(line)
