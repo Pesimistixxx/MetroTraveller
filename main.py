@@ -169,10 +169,10 @@ def calculate_root(message):
             first_line_station = station
 
         if station in station_list[:-1]:
+            if prev_line_num == line_num:
+                route_sequences.append([stations_to_id_dict[first_line_station], stations_to_id_dict[station] , 0])
             first_line_station = station
             route_sequences.append([stations_to_id_dict[station], 1])
-            # if first_line_station != prev_station:
-            #     route_sequences.append([stations_to_id_dict[first_line_station], stations_to_id_dict[prev_station], 1])
         prev_line_num = station.split('_')[-1]
         prev_station = station
 
